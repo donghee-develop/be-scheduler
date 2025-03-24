@@ -53,10 +53,9 @@ public class ScheduleController {
     public ResponseEntity<?> updateSchedule(
             @PathVariable Long id
     ){
-        Optional<GetScheduleDTO> getScheduleDTO = scheduleService.getScheduleById(id);
-        if (getScheduleDTO.isEmpty()) {
-            throw new ScheduleNotFoundException(id);
-        }
+        GetScheduleDTO getScheduleDTO = scheduleService.getScheduleById(id)
+                .orElseThrow(() -> new ScheduleNotFoundException(id));
+
         return ResponseEntity.ok(getScheduleDTO);
     }
     @PutMapping("/schedule")

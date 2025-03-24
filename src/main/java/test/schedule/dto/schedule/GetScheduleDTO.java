@@ -8,13 +8,11 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true)
-public class GetScheduleDTO extends ScheduleDTO{
-    private int rn;
+public class GetScheduleDTO{
     private String name;
-    public GetScheduleDTO(Long id, String content, Long userId, String name, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        super(id, content, userId, createdAt, updatedAt);
-        this.name = name;
-    }
-
+    private Long id;
+    private String content;
+    private Long userId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

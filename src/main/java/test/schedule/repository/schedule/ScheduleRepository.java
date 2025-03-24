@@ -54,10 +54,10 @@ public class ScheduleRepository {
         params.add((pagingDTO.getNowPage() - 1) * pagingDTO.getCntPage());
         params.add(pagingDTO.getCntPage());
         return jdbcTemplate.query(sql, params.toArray(), (rs, rowNum) -> new GetScheduleDTO(
+                rs.getString("name"),
                 rs.getLong("id"),
                 rs.getString("content"),
                 rs.getLong("user_id"),
-                rs.getString("name"),
                 rs.getTimestamp("updated_at").toLocalDateTime(),
                 Optional.ofNullable(rs.getTimestamp("updated_at"))
                         .map(Timestamp::toLocalDateTime)
@@ -127,13 +127,14 @@ public class ScheduleRepository {
         String sql = "SELECT s.id, s.content, s.user_id, u.name as name, s.created_at, s.updated_at " +
                 "FROM schedule s JOIN user u ON s.user_id = u.user_id " +
                 "WHERE s.id = ?";
+        // EmptyResult 방지용 리스트 그리고 첫번째 리스트 반환
         List<GetScheduleDTO> result = jdbcTemplate.query(sql, new Object[]{id}, (rs, rowNum) -> new GetScheduleDTO(
+                rs.getString("name"),
                 rs.getLong("id"),
                 rs.getString("content"),
                 rs.getLong("user_id"),
-                rs.getString("name"),
                 rs.getTimestamp("created_at").toLocalDateTime(),
-                Optional.ofNullable(rs.getTimestamp("updated_at")).map(Timestamp::toLocalDateTime).orElse(null)
+                rs.getTimestamp("updated_at").toLocalDateTime()
         ));
         return result.stream().findFirst();
     }
