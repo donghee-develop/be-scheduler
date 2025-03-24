@@ -31,12 +31,12 @@ API 명세 : https://documenter.getpostman.com/view/25938596/2sAYkGJdwo
 
 프론트 GitHub : https://github.com/donghee-develop/fe-scheduler
 
-## 5. 주요 기능
+## 4. 주요 기능
 
 1. 사용자 별 일정 등록 및 보기
 2. 비밀번호를 이용해 일정 수정 및 삭제
 
-## 6. 사용법
+## 5. 사용법
 - 로컬 환경의 웹 페이지에서 동작한다.
 
 
