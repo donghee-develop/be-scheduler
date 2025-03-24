@@ -29,6 +29,7 @@ ERD 설계 : https://www.erdcloud.com/d/Q3ZTnSSAXxtr52o4Y
 
 API 명세 : https://documenter.getpostman.com/view/25938596/2sAYkGJdwo
 
+프론트 GitHub : https://github.com/donghee-develop/fe-scheduler
 
 ## 5. 주요 기능
 
