@@ -3,9 +3,10 @@ package test.schedule.dto.schedule;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
 import lombok.ToString;
 
-@Data
+@Getter
 @ToString
 public class DeleteScheduleDTO {
     private Long id;
