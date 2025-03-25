@@ -41,7 +41,6 @@ public class ScheduleRepository {
                 LIMIT ?, ?
 """;
 
-
         List<Object> params = new ArrayList<>();
         LocalDateTime startDateTime = startDate.atStartOfDay();
         LocalDateTime endDateTime = endDate.atTime(23, 59, 59, 999999999);

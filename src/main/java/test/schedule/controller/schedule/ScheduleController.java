@@ -25,7 +25,7 @@ import java.util.Optional;
 public class ScheduleController {
     private final ScheduleService scheduleService;
 
-    @GetMapping("/schedule")
+    @GetMapping("/schedules")
     public Map<String,Object> getSchedules(
             @RequestParam(required = false, defaultValue = "") String keyword,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -42,23 +42,24 @@ public class ScheduleController {
         response.put("total",total);
         return response;
     }
-    @PostMapping("/schedule")
+    @PostMapping("/schedules")
     public ResponseEntity<Void> postSchedule(
            @Valid @RequestBody PostScheduleDTO postScheduleDTO
     ){
         scheduleService.postSchedule(postScheduleDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    @GetMapping("/schedule/{id}")
+    @GetMapping("/schedules/{id}")
     public ResponseEntity<?> updateSchedule(
             @PathVariable Long id
     ){
+        // 스케줄 익셉션 서비스나 레파 옵셔널을 푸는 것도 비지니스 로직
         GetScheduleDTO getScheduleDTO = scheduleService.getScheduleById(id)
                 .orElseThrow(() -> new ScheduleNotFoundException(id));
 
         return ResponseEntity.ok(getScheduleDTO);
     }
-    @PutMapping("/schedule")
+    @PutMapping("/schedules")
     public ResponseEntity<Void> updateSchedule(
             @Valid @RequestBody UpdateScheduleDTO updateScheduleDTO
     ){
@@ -66,7 +67,7 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
     // 필요 시 use_yn 변수를 통해 update
-    @DeleteMapping("/schedule")
+    @DeleteMapping("/schedules")
     public ResponseEntity<?> deleteSchedule(
             @Valid @RequestBody DeleteScheduleDTO deleteScheduleDTO
     ){

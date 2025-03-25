@@ -33,5 +33,4 @@ public class GlobalExceptionHandler {
         String message = ex.getMessage();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
     }
-
 }
