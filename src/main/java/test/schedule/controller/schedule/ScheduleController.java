@@ -19,13 +19,13 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/schedules")
 @CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class ScheduleController {
     private final ScheduleService scheduleService;
 
-    @GetMapping("/schedules")
+    @GetMapping
     public Map<String,Object> getSchedules(
             @RequestParam(required = false, defaultValue = "") String keyword,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -42,14 +42,14 @@ public class ScheduleController {
         response.put("total",total);
         return response;
     }
-    @PostMapping("/schedules")
+    @PostMapping
     public ResponseEntity<Void> postSchedule(
            @Valid @RequestBody PostScheduleDTO postScheduleDTO
     ){
         scheduleService.postSchedule(postScheduleDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    @GetMapping("/schedules/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<GetScheduleDTO> updateSchedule(
             @PathVariable Long id
     ){
@@ -58,7 +58,7 @@ public class ScheduleController {
 
         return ResponseEntity.ok(getScheduleDTO);
     }
-    @PutMapping("/schedules")
+    @PutMapping
     public ResponseEntity<Void> updateSchedule(
             @Valid @RequestBody UpdateScheduleDTO updateScheduleDTO
     ){
@@ -66,7 +66,7 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
     // 필요 시 use_yn 변수를 통해 update
-    @DeleteMapping("/schedules")
+    @DeleteMapping
     public ResponseEntity<Void> deleteSchedule(
             @Valid @RequestBody DeleteScheduleDTO deleteScheduleDTO
     ){
