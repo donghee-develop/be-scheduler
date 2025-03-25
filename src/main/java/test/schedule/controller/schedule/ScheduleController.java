@@ -50,10 +50,9 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @GetMapping("/schedules/{id}")
-    public ResponseEntity<?> updateSchedule(
+    public ResponseEntity<GetScheduleDTO> updateSchedule(
             @PathVariable Long id
     ){
-        // 스케줄 익셉션 서비스나 레파 옵셔널을 푸는 것도 비지니스 로직
         GetScheduleDTO getScheduleDTO = scheduleService.getScheduleById(id)
                 .orElseThrow(() -> new ScheduleNotFoundException(id));
 
@@ -68,7 +67,7 @@ public class ScheduleController {
     }
     // 필요 시 use_yn 변수를 통해 update
     @DeleteMapping("/schedules")
-    public ResponseEntity<?> deleteSchedule(
+    public ResponseEntity<Void> deleteSchedule(
             @Valid @RequestBody DeleteScheduleDTO deleteScheduleDTO
     ){
         scheduleService.deleteSchedule(deleteScheduleDTO);
